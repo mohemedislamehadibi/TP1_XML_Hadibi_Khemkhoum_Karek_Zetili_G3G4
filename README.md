@@ -1,7 +1,7 @@
 #   TP Mini-Projet XML 
 
 
-## 👥 Membres du groupe
+##  Membres du groupe
 
 | Nom Prénom | Groupe |
 |---|---|
