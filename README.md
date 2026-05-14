@@ -1,4 +1,4 @@
-# 🏆  TP Mini-Projet XML 
+#   TP Mini-Projet XML 
 
 
 ## 👥 Membres du groupe
