@@ -1,8 +1,5 @@
 <?php
-// ═══════════════════════════════════════════════════════
-//  index.php — Page d'accueil : Liste des concours
-//  Club Info_Tech — TP XML / XQuery / PHP
-// ═══════════════════════════════════════════════════════
+
 
 $xml = simplexml_load_file('../club.xml');
 if (!$xml) {
@@ -45,11 +42,11 @@ if (!$xml) {
     </thead>
     <tbody>
     <?php
-    // Parcourir chaque concours dans le XML
+    
     foreach ($xml->concours->concours as $c) {
         $idCat = (string)$c['categorieRef'];
 
-        // Jointure : trouver le libellé de la catégorie
+        
         $libelle = '';
         foreach ($xml->categories->categorie as $cat) {
             if ((string)$cat['id'] === $idCat) {
@@ -58,7 +55,7 @@ if (!$xml) {
             }
         }
 
-        // Compter les participants
+        
         $nbPart = count($c->participants->participant);
 
         echo "<tr>

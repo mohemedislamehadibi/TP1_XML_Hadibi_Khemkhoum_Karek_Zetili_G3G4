@@ -1,9 +1,4 @@
 <?php
-// ═══════════════════════════════════════════════════════
-//  requetes.php — Requêtes XQuery via BaseX shell_exec
-//  AUTEURS : Hadibi Mohamed Islam (G3) — Khemkhoum Fethi (G3)
-//            Karek Abdenasser (G3) — Zetili Mossaab (G4)
-// ═══════════════════════════════════════════════════════
 
 $resultat = '';
 $erreur   = '';
@@ -15,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $xquery) {
     $xmlPath = realpath(__DIR__ . '/../club.xml');
     $xmlPath = str_replace('\\', '/', $xmlPath);
     $query   = str_replace('doc("club.xml")', 'doc("' . $xmlPath . '")', $xquery);
-    $tmpFile = sys_get_temp_dir() . '\\query_tmp.xq';
+$tmpFile = sys_get_temp_dir() . '\\query_tmp.xq';
 
     file_put_contents($tmpFile, $query);
 

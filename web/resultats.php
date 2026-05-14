@@ -1,7 +1,5 @@
 <?php
-// ═══════════════════════════════════════════════════════
-//  resultats.php — Résultats et vainqueur d'un concours
-// ═══════════════════════════════════════════════════════
+
 
 $xml = simplexml_load_file('../club.xml');
 $concoursSelectionne = $_GET['concours'] ?? '';
@@ -32,7 +30,7 @@ $titreConc = '';
 <main>
   <h2>Résultats des Concours</h2>
 
-  <!-- Liste déroulante pour choisir le concours -->
+  
   <form method="GET" action="resultats.php" class="form-inline">
     <label for="concours">Sélectionner un concours :</label>
     <select name="concours" id="concours">
@@ -48,7 +46,7 @@ $titreConc = '';
   </form>
 
   <?php
-  // Afficher les résultats si un concours est sélectionné
+  
   if ($concoursSelectionne):
     foreach ($xml->concours->concours as $c) {
       if ((string)$c['id'] === $concoursSelectionne) {
@@ -78,7 +76,7 @@ $titreConc = '';
       }
     }
 
-    // Trier par score décroissant
+    
     usort($resultats, fn($a, $b) => $b['score'] <=> $a['score']);
   ?>
 

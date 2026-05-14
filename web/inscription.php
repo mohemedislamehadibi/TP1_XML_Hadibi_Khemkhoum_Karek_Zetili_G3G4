@@ -1,20 +1,18 @@
 <?php
-// ═══════════════════════════════════════════════════════
-//  inscription.php — Inscription d'un membre à un concours
-// ═══════════════════════════════════════════════════════
+
 
 $xml = simplexml_load_file('../club.xml');
 $message = '';
 $typeMsg = '';
 
-// ── Traitement du formulaire (soumission POST) ──
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $membreRef  = htmlspecialchars($_POST['membre']  ?? '');
     $concoursId = htmlspecialchars($_POST['concours'] ?? '');
     $complexite = intval($_POST['complexite'] ?? 0);
     $temps      = intval($_POST['temps'] ?? 0);
 
-    // Validation des données
+   
     if (!$membreRef || !$concoursId) {
         $message = "Veuillez sélectionner un membre et un concours.";
         $typeMsg = 'error';
@@ -25,16 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Le temps d'exécution doit être supérieur à 0.";
         $typeMsg = 'error';
     } else {
-        // Trouver le concours cible
+        
         $concoursTarget = null;
-        foreach ($xml->concours->concours as $c) {
-            if ((string)$c['id'] === $concoursId) {
+  foreach ($xml->concours->concours as $c) {
+        if ((string)$c['id'] === $concoursId) {
                 $concoursTarget = $c;
                 break;
             }
         }
 
-        // Trouver le membre
+     
         $membreCatRef = '';
         foreach ($xml->membres->membre as $m) {
             if ((string)$m['id'] === $membreRef) {
@@ -43,8 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Vérifier que le membre est dans la même catégorie que le concours
-        if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef) {
+if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef) {
             $message = "Ce membre n'appartient pas à la catégorie de ce concours !";
             $typeMsg = 'error';
         } else {
@@ -63,17 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 // Ajouter le nouveau participant dans le XML
                 $nouveauParticipant = $concoursTarget->participants->addChild('participant');
-                $nouveauParticipant->addAttribute('membreRef', $membreRef);
-                $nouveauParticipant->addChild('complexite', $complexite);
-                $nouveauParticipant->addChild('tempsExecution', $temps);
+              $nouveauParticipant->addAttribute('membreRef', $membreRef);
+     $nouveauParticipant->addChild('complexite', $complexite);
+            $nouveauParticipant->addChild('tempsExecution', $temps);
 
-                // Sauvegarder le fichier XML mis à jour
-                $xml->asXML('../club.xml');
+    
+            $xml->asXML('../club.xml');
 
                 $message = "✅ Inscription réussie ! $membreRef ajouté au concours $concoursId.";
                 $typeMsg = 'success';
 
-                // Recharger le XML
+
                 $xml = simplexml_load_file('../club.xml');
             }
         }

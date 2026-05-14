@@ -1,57 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  FICHIER  : club.xsd
-  PROJET   : Club Info_Tech — TP Mini-Projet XML / XQuery
-  AUTEURS  : Hadibi Mohamed Islam (G3) — Khemkhoum Fethi (G3)
-             Karek Abdenasser (G3) — Zetili Mossaab (G4)
-  MODULE   : Données semi-structurées
-  UNIVERSITE : 20 Août 1955 — Skikda | Licence 3 ISIL
--->
+
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <!-- ═══════════════════════════════════════
-       TYPES SIMPLES AVEC RESTRICTIONS
-  ═══════════════════════════════════════ -->
-
-  <!-- Pattern pour id catégorie : C suivi de chiffres -->
   <xs:simpleType name="TypeIdCategorie">
     <xs:restriction base="xs:ID">
       <xs:pattern value="C[0-9]+"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Pattern pour id membre : M suivi de 3 chiffres -->
-  <xs:simpleType name="TypeIdMembre">
+ <xs:simpleType name="TypeIdMembre">
     <xs:restriction base="xs:ID">
       <xs:pattern value="M[0-9]{3}"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Pattern pour id concours : CO suivi de chiffres -->
+ 
   <xs:simpleType name="TypeIdConcours">
     <xs:restriction base="xs:ID">
       <xs:pattern value="CO[0-9]+"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Référence vers une catégorie (IDREF) -->
+ 
   <xs:simpleType name="TypeRefCategorie">
     <xs:restriction base="xs:IDREF"/>
   </xs:simpleType>
 
-  <!-- Référence vers un membre (IDREF) -->
+ 
   <xs:simpleType name="TypeRefMembre">
     <xs:restriction base="xs:IDREF"/>
   </xs:simpleType>
 
-  <!-- Coefficient : décimal strictement positif -->
+ 
   <xs:simpleType name="TypeCoefficient">
     <xs:restriction base="xs:decimal">
       <xs:minExclusive value="0"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Complexité : entier entre 0 et 100 -->
+  
   <xs:simpleType name="TypeComplexite">
     <xs:restriction base="xs:integer">
       <xs:minInclusive value="0"/>
@@ -59,45 +46,40 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Temps d'exécution : entier strictement positif (en ms) -->
   <xs:simpleType name="TypeTempsExecution">
     <xs:restriction base="xs:integer">
       <xs:minInclusive value="1"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Email : doit contenir @ -->
+  
   <xs:simpleType name="TypeEmail">
     <xs:restriction base="xs:string">
       <xs:pattern value="[^@]+@[^@]+"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Chaîne non vide -->
+  
   <xs:simpleType name="TypeStringNonVide">
     <xs:restriction base="xs:string">
       <xs:minLength value="1"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- ═══════════════════════════════════════
-       TYPES COMPLEXES
-  ═══════════════════════════════════════ -->
-
-  <!-- Type : <categorie> -->
+  
   <xs:complexType name="TypeCategorie">
     <xs:attribute name="id"      type="TypeIdCategorie" use="required"/>
     <xs:attribute name="libelle" type="TypeStringNonVide" use="required"/>
   </xs:complexType>
 
-  <!-- Type : <categories> -->
+ 
   <xs:complexType name="TypeCategories">
     <xs:sequence>
       <xs:element name="categorie" type="TypeCategorie" minOccurs="3" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
-  <!-- Type : <membre> -->
+ 
   <xs:complexType name="TypeMembre">
     <xs:sequence>
       <xs:element name="nom"    type="TypeStringNonVide"/>
@@ -108,14 +90,14 @@
     <xs:attribute name="categorieRef" type="TypeRefCategorie" use="required"/>
   </xs:complexType>
 
-  <!-- Type : <membres> -->
+ 
   <xs:complexType name="TypeMembres">
     <xs:sequence>
       <xs:element name="membre" type="TypeMembre" minOccurs="8" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
-  <!-- Type : <participant> -->
+ 
   <xs:complexType name="TypeParticipant">
     <xs:sequence>
       <xs:element name="complexite"     type="TypeComplexite"/>
@@ -124,14 +106,14 @@
     <xs:attribute name="membreRef" type="TypeRefMembre" use="required"/>
   </xs:complexType>
 
-  <!-- Type : <participants> -->
+ 
   <xs:complexType name="TypeParticipants">
     <xs:sequence>
       <xs:element name="participant" type="TypeParticipant" minOccurs="3" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
-  <!-- Type : <concours> (un seul concours) -->
+ 
   <xs:complexType name="TypeUnConcours">
     <xs:sequence>
       <xs:element name="titre"        type="TypeStringNonVide"/>
@@ -143,14 +125,14 @@
     <xs:attribute name="coefficient"  type="TypeCoefficient"   use="required"/>
   </xs:complexType>
 
-  <!-- Type : <concours> (la liste) -->
+ 
   <xs:complexType name="TypeListeConcours">
     <xs:sequence>
       <xs:element name="concours" type="TypeUnConcours" minOccurs="3" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
-  <!-- Type : <club> racine -->
+ 
   <xs:complexType name="TypeClub">
     <xs:sequence>
       <xs:element name="categories" type="TypeCategories"/>
@@ -160,9 +142,7 @@
     <xs:attribute name="nom" type="TypeStringNonVide" use="required"/>
   </xs:complexType>
 
-  <!-- ═══════════════════════════════════════
-       ÉLÉMENT RACINE
-  ═══════════════════════════════════════ -->
+ 
   <xs:element name="club" type="TypeClub"/>
 
 </xs:schema>

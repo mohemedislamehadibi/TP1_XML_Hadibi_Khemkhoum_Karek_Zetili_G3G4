@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  FICHIER  : club.xml
-  PROJET   : Club Info_Tech — TP Mini-Projet XML / XQuery
-  AUTEURS  : Hadibi Mohamed Islam (G3) — Khemkhoum Fethi (G3)
-             Karek Abdenasser (G3) — Zetili Mossaab (G4)
-  MODULE   : Données semi-structurées
-  UNIVERSITE : 20 Août 1955 — Skikda | Licence 3 ISIL
--->
+
 <club nom="Info_Tech" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:noNamespaceSchemaLocation="club.xsd">
 
-  <!-- ═══ CATÉGORIES ═══ -->
+  
   <categories>
     <categorie id="C1" libelle="Intelligence Artificielle"/>
     <categorie id="C2" libelle="Développement Web"/>
@@ -18,9 +11,9 @@
     <categorie id="C4" libelle="Réseaux et Systèmes"/>
   </categories>
 
-  <!-- ═══ MEMBRES ═══ -->
+  
   <membres>
-    <!-- Catégorie C1 : Intelligence Artificielle -->
+  
     <membre id="M001" categorieRef="C1">
       <nom>Benali</nom>
       <prenom>Ahmed</prenom>
@@ -37,7 +30,7 @@
       <email>y.hamidi@club.dz</email>
     </membre>
 
-    <!-- Catégorie C2 : Développement Web -->
+  
     <membre id="M004" categorieRef="C2">
       <nom>Khelif</nom>
       <prenom>Sara</prenom>
@@ -49,12 +42,12 @@
       <email>w.larbi@club.dz</email>
     </membre>
     <membre id="M006" categorieRef="C2">
-      <nom>Meziane</nom>
-      <prenom>Asma</prenom>
-      <email>a.meziane@club.dz</email>
+      <nom>karek</nom>
+      <prenom>Abdnaser</prenom>
+      <email>a.karek@club.dz</email>
     </membre>
 
-    <!-- Catégorie C3 : Sécurité Informatique -->
+  
     <membre id="M007" categorieRef="C3">
       <nom>Rahmani</nom>
       <prenom>Karim</prenom>
@@ -66,28 +59,28 @@
       <email>n.saoudi@club.dz</email>
     </membre>
     <membre id="M009" categorieRef="C3">
-      <nom>Tabet</nom>
-      <prenom>Riad</prenom>
-      <email>r.tabet@club.dz</email>
+      <nom>hadibi</nom>
+      <prenom>mohemed  islam</prenom>
+      <email>r.hadibi@club.dz</email>
     </membre>
 
-    <!-- Catégorie C4 : Réseaux et Systèmes -->
+  
     <membre id="M010" categorieRef="C4">
       <nom>Zerrouk</nom>
       <prenom>Lyna</prenom>
       <email>l.zerrouk@club.dz</email>
     </membre>
     <membre id="M011" categorieRef="C4">
-      <nom>Ouali</nom>
-      <prenom>Sofiane</prenom>
-      <email>s.ouali@club.dz</email>
+      <nom>zettily</nom>
+      <prenom>moussab</prenom>
+      <email>s.zettily@club.dz</email>
     </membre>
   </membres>
 
-  <!-- ═══ CONCOURS ═══ -->
+  
   <concours>
 
-    <!-- Concours C1 : Intelligence Artificielle -->
+  
     <concours id="CO1" categorieRef="C1" date="2025-03-15" coefficient="1.5">
       <titre>Concours IA — Printemps 2025</titre>
       <participants>
