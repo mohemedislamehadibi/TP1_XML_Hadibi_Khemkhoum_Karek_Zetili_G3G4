@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <club nom="Info_Tech" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:noNamespaceSchemaLocation="club.xsd">
 
@@ -13,7 +12,8 @@
 
   
   <membres>
-  
+
+ 
     <membre id="M001" categorieRef="C1">
       <nom>Benali</nom>
       <prenom>Ahmed</prenom>
@@ -30,7 +30,7 @@
       <email>y.hamidi@club.dz</email>
     </membre>
 
-  
+ 
     <membre id="M004" categorieRef="C2">
       <nom>Khelif</nom>
       <prenom>Sara</prenom>
@@ -42,12 +42,12 @@
       <email>w.larbi@club.dz</email>
     </membre>
     <membre id="M006" categorieRef="C2">
-      <nom>karek</nom>
+      <nom>Karek</nom>
       <prenom>Abdnaser</prenom>
       <email>a.karek@club.dz</email>
     </membre>
 
-  
+ 
     <membre id="M007" categorieRef="C3">
       <nom>Rahmani</nom>
       <prenom>Karim</prenom>
@@ -59,89 +59,118 @@
       <email>n.saoudi@club.dz</email>
     </membre>
     <membre id="M009" categorieRef="C3">
-      <nom>hadibi</nom>
-      <prenom>mohemed  islam</prenom>
+      <nom>Hadibi</nom>
+      <prenom>Mohamed Islam</prenom>
       <email>r.hadibi@club.dz</email>
     </membre>
 
-  
+ 
     <membre id="M010" categorieRef="C4">
       <nom>Zerrouk</nom>
       <prenom>Lyna</prenom>
       <email>l.zerrouk@club.dz</email>
     </membre>
     <membre id="M011" categorieRef="C4">
-      <nom>zettily</nom>
-      <prenom>moussab</prenom>
+      <nom>Zettily</nom>
+      <prenom>Moussab</prenom>
       <email>s.zettily@club.dz</email>
     </membre>
+  
+    <membre id="M012" categorieRef="C4">
+      <nom>Bouazza</nom>
+      <prenom>Riad</prenom>
+      <email>r.bouazza@club.dz</email>
+    </membre>
+
   </membres>
 
   
   <concours>
 
-  
+   
     <concours id="CO1" categorieRef="C1" date="2025-03-15" coefficient="1.5">
       <titre>Concours IA — Printemps 2025</titre>
       <participants>
         <participant membreRef="M001">
           <complexite>85</complexite>
           <tempsExecution>120</tempsExecution>
-          <!-- score = (85 + 120) × 1.5 = 307.5 -->
+   
         </participant>
         <participant membreRef="M002">
           <complexite>90</complexite>
           <tempsExecution>95</tempsExecution>
-          <!-- score = (90 + 95) × 1.5 = 277.5 -->
+   
         </participant>
         <participant membreRef="M003">
           <complexite>78</complexite>
           <tempsExecution>140</tempsExecution>
-          <!-- score = (78 + 140) × 1.5 = 327.0 -->
+   
         </participant>
       </participants>
     </concours>
 
-    <!-- Concours C2 : Développement Web -->
+   
     <concours id="CO2" categorieRef="C2" date="2025-04-10" coefficient="1.2">
       <titre>Hackathon Web — Avril 2025</titre>
       <participants>
         <participant membreRef="M004">
           <complexite>92</complexite>
           <tempsExecution>80</tempsExecution>
-          <!-- score = (92 + 80) × 1.2 = 206.4 -->
+   
         </participant>
         <participant membreRef="M005">
           <complexite>88</complexite>
           <tempsExecution>110</tempsExecution>
-          <!-- score = (88 + 110) × 1.2 = 237.6 -->
+   
         </participant>
         <participant membreRef="M006">
           <complexite>95</complexite>
           <tempsExecution>75</tempsExecution>
-          <!-- score = (95 + 75) × 1.2 = 204.0 -->
+   
         </participant>
       </participants>
     </concours>
 
-    <!-- Concours C3 : Sécurité Informatique -->
+   
     <concours id="CO3" categorieRef="C3" date="2025-05-20" coefficient="2.0">
       <titre>CTF Sécurité — Mai 2025</titre>
       <participants>
         <participant membreRef="M007">
           <complexite>70</complexite>
           <tempsExecution>200</tempsExecution>
-          <!-- score = (70 + 200) × 2.0 = 540.0 -->
+   
         </participant>
         <participant membreRef="M008">
           <complexite>88</complexite>
           <tempsExecution>150</tempsExecution>
-          <!-- score = (88 + 150) × 2.0 = 476.0 -->
+   
         </participant>
         <participant membreRef="M009">
           <complexite>95</complexite>
           <tempsExecution>180</tempsExecution>
-          <!-- score = (95 + 180) × 2.0 = 550.0 -->
+   
+        </participant>
+      </participants>
+    </concours>
+
+    
+    <concours id="CO4" categorieRef="C4" date="2025-06-15" coefficient="1.8">
+      <titre>Challenge Réseaux — Juin 2025</titre>
+      <participants>
+        <participant membreRef="M010">
+          <complexite>80</complexite>
+          <tempsExecution>130</tempsExecution>
+    
+        </participant>
+        <participant membreRef="M011">
+          <complexite>75</complexite>
+          <tempsExecution>160</tempsExecution>
+    
+        </participant>
+        <participant membreRef="M012">
+          <complexite>88</complexite>
+          <tempsExecution>110</tempsExecution>
+    
         </participant>
       </participants>
     </concours>

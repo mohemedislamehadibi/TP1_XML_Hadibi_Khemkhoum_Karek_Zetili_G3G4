@@ -1,18 +1,15 @@
 <?php
 
-
 $xml = simplexml_load_file('../club.xml');
 $message = '';
 $typeMsg = '';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $membreRef  = htmlspecialchars($_POST['membre']  ?? '');
-    $concoursId = htmlspecialchars($_POST['concours'] ?? '');
+    $membreRef  = htmlspecialchars(trim($_POST['membre']  ?? ''));
+    $concoursId = htmlspecialchars(trim($_POST['concours'] ?? ''));
     $complexite = intval($_POST['complexite'] ?? 0);
     $temps      = intval($_POST['temps'] ?? 0);
 
-   
     if (!$membreRef || !$concoursId) {
         $message = "Veuillez sélectionner un membre et un concours.";
         $typeMsg = 'error';
@@ -23,32 +20,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Le temps d'exécution doit être supérieur à 0.";
         $typeMsg = 'error';
     } else {
-        
+
+        // ✅ Recherche du concours cible
         $concoursTarget = null;
-  foreach ($xml->concours->concours as $c) {
-        if ((string)$c['id'] === $concoursId) {
+        foreach ($xml->concours->concours as $c) {
+            if (trim((string)$c['id']) === $concoursId) {
                 $concoursTarget = $c;
                 break;
             }
         }
 
-     
+        // ✅ Recherche de la catégorie du membre
         $membreCatRef = '';
         foreach ($xml->membres->membre as $m) {
-            if ((string)$m['id'] === $membreRef) {
-                $membreCatRef = (string)$m['categorieRef'];
+            if (trim((string)$m['id']) === $membreRef) {
+                $membreCatRef = trim((string)$m['categorieRef']);
                 break;
             }
         }
 
-if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef) {
+        // ✅ Vérification que le concours existe
+        if (!$concoursTarget) {
+            $message = "Concours introuvable.";
+            $typeMsg = 'error';
+        }
+        // ✅ Vérification de la compatibilité catégorie membre/concours
+        elseif (trim((string)$concoursTarget['categorieRef']) !== $membreCatRef) {
             $message = "Ce membre n'appartient pas à la catégorie de ce concours !";
             $typeMsg = 'error';
         } else {
-            // Vérifier si le membre participe déjà
+            // ✅ Vérification si le membre est déjà inscrit
             $dejaInscrit = false;
             foreach ($concoursTarget->participants->participant as $p) {
-                if ((string)$p['membreRef'] === $membreRef) {
+                if (trim((string)$p['membreRef']) === $membreRef) {
                     $dejaInscrit = true;
                     break;
                 }
@@ -58,19 +62,19 @@ if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef
                 $message = "Ce membre est déjà inscrit à ce concours.";
                 $typeMsg = 'error';
             } else {
-                // Ajouter le nouveau participant dans le XML
+                // ✅ Ajout du nouveau participant
                 $nouveauParticipant = $concoursTarget->participants->addChild('participant');
-              $nouveauParticipant->addAttribute('membreRef', $membreRef);
-     $nouveauParticipant->addChild('complexite', $complexite);
-            $nouveauParticipant->addChild('tempsExecution', $temps);
+                $nouveauParticipant->addAttribute('membreRef', $membreRef);
+                $nouveauParticipant->addChild('complexite', $complexite);
+                $nouveauParticipant->addChild('tempsExecution', $temps);
 
-    
-            $xml->asXML('../club.xml');
+                // ✅ Sauvegarde dans le fichier XML
+                $xml->asXML('../club.xml');
 
                 $message = "✅ Inscription réussie ! $membreRef ajouté au concours $concoursId.";
                 $typeMsg = 'success';
 
-
+                // ✅ Rechargement du XML après sauvegarde
                 $xml = simplexml_load_file('../club.xml');
             }
         }
@@ -113,7 +117,7 @@ if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef
         <select name="membre" id="membre" required>
           <option value="">-- Choisir un membre --</option>
           <?php foreach ($xml->membres->membre as $m): ?>
-            <option value="<?= $m['id'] ?>">
+            <option value="<?= htmlspecialchars((string)$m['id']) ?>">
               <?= $m['id'] ?> — <?= $m->prenom ?> <?= $m->nom ?>
               (<?= $m['categorieRef'] ?>)
             </option>
@@ -127,8 +131,8 @@ if ($concoursTarget && (string)$concoursTarget['categorieRef'] !== $membreCatRef
         <select name="concours" id="concours" required>
           <option value="">-- Choisir un concours --</option>
           <?php foreach ($xml->concours->concours as $c): ?>
-            <option value="<?= $c['id'] ?>">
-              <?= $c['id'] ?> — <?= $c->titre ?>
+            <option value="<?= htmlspecialchars((string)$c['id']) ?>">
+              <?= $c['id'] ?> — <?= $c->titre ?> (<?= $c['categorieRef'] ?>)
             </option>
           <?php endforeach; ?>
         </select>
