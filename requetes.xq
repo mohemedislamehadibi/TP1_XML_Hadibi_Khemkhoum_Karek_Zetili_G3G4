@@ -2,7 +2,7 @@
 
 (: ==== Q1 : liste de tous les membres avec leur categorie ==== :)
 
-(: on construit un XML propre avec nom complet + email + categorie :)
+
 <membres>
 {
   for $membre in doc("club.xml")//membre
@@ -19,7 +19,7 @@
 
 (: ==== Q2 : concours tries par date (du plus ancien au plus recent) ==== :)
 
-(: attention : sans xs:date le tri est alphabetique donc incorrect :)
+
 <listeConcours>
 {
   for $c in doc("club.xml")//concours/concours
@@ -96,7 +96,7 @@
 
 
 (: ==== Q5 : membres d'une categorie, tries alphabetiquement ====
-   -> changer $categorie pour filtrer sur une autre
+   changer $categorie pour filtrer sur une autre
 :)
 
 let $categorie := "Intelligence Artificielle"
